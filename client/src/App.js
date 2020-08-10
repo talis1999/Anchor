@@ -19,11 +19,10 @@ import Table from './components/Table';
 
 const theme = createMuiTheme({
   palette: {
-    type: 'dark',
+    //type: 'dark',
   }
 });
 
-console.log('2')
 
 const useStyles = makeStyles((theme) => ({
   app: {
