@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 
 export default function AutoTable(props) {
 
-  const rows = props.list
+  const rows = props.list||[]
 
   const columns = useMemo(() => {
     let columns = []
@@ -63,7 +63,7 @@ export default function AutoTable(props) {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth, background: '#4050ac', color: 'white' }}
+                  style={{ minWidth: column.minWidth, background: '#4050ac', color: 'white',padding:'32px',fontWeight:'bolder',fontSize: '120%',fontFamily:'Arial, Helvetica, sans-serif' }}
                 >
                   {column.label}
                 </TableCell>
@@ -71,17 +71,19 @@ export default function AutoTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
+
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
                 <TableRow style={{ background: rowsColor.background}} hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
-                      <TableCell key={column.id} align={column.align} style = {{color: rowsColor.color, fontSize:'15px'}}>
+                      <TableCell key={column.id} align={column.align} style = {{color: rowsColor.color, fontSize:'15px',padding:'16px 32px'}}>
                         {column.format && typeof value === 'number' ? column.format(value) : value}
                       </TableCell>
                     );
                   })}
+
                 </TableRow>
               );
             })}

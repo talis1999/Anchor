@@ -35,7 +35,7 @@ export default function Header() {
           <div className={classes.title}>
             <EnhancedEncryptionIcon fontSize='large'/>
             <Typography variant="h4">
-                Anchor database
+                Anchor system
             </Typography>
           </div>
       </AppBar>
