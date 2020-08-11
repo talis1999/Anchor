@@ -74,11 +74,14 @@ function App() {
 
   const fetchData = () => {
     let data = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 5; i++) {
       data.push({ state: 'moderatly wounded', id: '123456789', coordinates: '12, 34' })
     }
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 5; i++) {
       data.push({ state: 'severely injured', id: '567455555', coordinates: '34, 34' })
+    }
+    for (let i = 0; i < 5; i++) {
+      data.push({ state: 'rescued', id: '567455555', coordinates: '34, 34' })
     }
     
     //add time column

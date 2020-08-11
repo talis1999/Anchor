@@ -19,17 +19,35 @@ const useStyles = makeStyles({
   },
 });
 
+const color = state => {
+  switch (state) {
+    case 'uninjured':
+      return {}
+    case 'lightly injured':
+      return {color:'white', background:'yellow'}
+    case 'moderatly wounded':
+      return {color:'white', background:'orange'}
+    case 'severely injured':
+      return {color:'white', background:'red'}
+    case 'deceased':
+      return {color:'white', background:'black'}
+    case 'rescued':
+      return {color:'white', background:'green'}
+    default:
+      return {}
+  }
+}
 
 export default function AutoTable(props) {
 
-  const rows = props.list||[]
+  const rows = props.list
 
   const columns = useMemo(() => {
     let columns = []
     if (rows[0]) {
       columns = Object.keys(rows[0]).map(t => {
         const label = t.charAt(0).toUpperCase() + t.slice(1)
-        return ({ id: t, label, minWidth: 50 })
+        return ({ id: t, label, minWidth: 100 })
       })
     }
 
@@ -37,7 +55,6 @@ export default function AutoTable(props) {
   }, [rows])
 
 
-  const [tableColor, rowsColor] = props.coloring || [{ background: 'white', color: 'black' }, { background: 'white', color: 'black' }]
 
 
   const classes = useStyles();
@@ -74,11 +91,11 @@ export default function AutoTable(props) {
 
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
-                <TableRow style={{ background: rowsColor.background}} hover role="checkbox" tabIndex={-1} key={row.code}>
+                <TableRow style={{}} hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {
                     const value = row[column.id];
                     return (
-                      <TableCell key={column.id} align={column.align} style = {{color: rowsColor.color, fontSize:'15px',padding:'16px 32px'}}>
+                      <TableCell key={column.id} align={column.align} style = {{...color(row.state),fontSize:'15px',padding:'16px 32px'}}>
                         {column.format && typeof value === 'number' ? column.format(value) : value}
                       </TableCell>
                     );

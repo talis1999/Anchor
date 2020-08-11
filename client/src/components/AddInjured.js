@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import cogoToast from 'cogo-toast';
 
 import DDL from './DDL';
 
@@ -31,13 +32,23 @@ export default function AddInjured() {
     const [state, setState] = useState('')
     const [id, setId] = useState('')
     const [coordinates, setCoordinates] = useState('')
+
+    const addInjured = () => {
+        if(state&&id&&coordinates){
+            cogoToast.success('Injured added');
+            console.log({id,coordinates,state})
+        }
+        else
+            cogoToast.warn("please fill the form")
+    }
+
     return (
         <div className={classes.root}>
-            <h1>Add injured</h1>
+            <h1 style={{color:'white'}}>Add injured</h1>
             <TextField id="Id" label="Id" variant="filled" style={{backgroundColor:'white',marginBottom:'8px'}} onChange={e => setId(e.target.value)}/>
             <TextField id="Coordinates" label="Coordinates" variant="filled" style={{backgroundColor:'white'}} onChange={e => setCoordinates(e.target.value)}/>
             <DDL state={state} setState={setState}/>
-            <Button className={classes.button} onClick = {e => console.log({id,coordinates,state})}>add</Button>
+            <Button className={classes.button} onClick = {e => addInjured()}>add</Button>
         </div>
     )
 }
